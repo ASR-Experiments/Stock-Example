@@ -10,13 +10,13 @@ public class BasicRoute extends org.apache.camel.builder.RouteBuilder {
   @Override
   public void configure() {
     from(RouteConstant.FIRST_ROUTE)
+        .setBody(constant("My Message = " + UUID.randomUUID()))
         .routeId(RouteConstant.FIRST_ROUTE)
         .tracing()
         .to(RouteConstant.FIRST_DIRECT);
 
     from(RouteConstant.FIRST_DIRECT)
         .routeId(RouteConstant.FIRST_DIRECT)
-        .setBody(constant("My Message = " + UUID.randomUUID()))
         .log("Manual Camel Log : ${body}")
         .log("Message History : ${messageHistory}")
         .to("log:camels-to-logger");

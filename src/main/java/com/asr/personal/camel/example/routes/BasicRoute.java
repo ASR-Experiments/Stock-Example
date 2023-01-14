@@ -1,7 +1,7 @@
 package com.asr.personal.camel.example.routes;
 
 import com.asr.personal.camel.example.constants.RouteConstant;
-import java.util.UUID;
+import com.asr.personal.camel.example.services.MessageGenerator;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -10,7 +10,7 @@ public class BasicRoute extends org.apache.camel.builder.RouteBuilder {
   @Override
   public void configure() {
     from(RouteConstant.FIRST_ROUTE)
-        .setBody(constant("My Message = " + UUID.randomUUID()))
+        .bean(MessageGenerator.class)
         .routeId(RouteConstant.FIRST_ROUTE)
         .tracing()
         .to(RouteConstant.FIRST_DIRECT);

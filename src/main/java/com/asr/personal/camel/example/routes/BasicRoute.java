@@ -12,8 +12,13 @@ public class BasicRoute extends org.apache.camel.builder.RouteBuilder {
     from(RouteConstant.FIRST_ROUTE)
         .routeId(RouteConstant.FIRST_ROUTE)
         .tracing()
+        .to(RouteConstant.FIRST_DIRECT);
+
+    from(RouteConstant.FIRST_DIRECT)
+        .routeId(RouteConstant.FIRST_DIRECT)
         .setBody(constant("My Message = " + UUID.randomUUID()))
         .log("Manual Camel Log : ${body}")
+        .log("Message History : ${messageHistory}")
         .to("log:camels-to-logger");
   }
 }

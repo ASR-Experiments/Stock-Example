@@ -23,11 +23,11 @@ public class RedisRoute extends RouteBuilder {
   public void configure() throws Exception {
 
     // @formatter:off
-    from(RouteConstant.FIRST_ROUTE + "?period=10000")
-        .bean(messageGenerator)
-        .routeId(RouteConstant.FIRST_ROUTE)
-        .tracing()
-        .to(RouteConstant.REDIS_STRING_PUT);
+//    from(RouteConstant.FIRST_ROUTE + "?period=10000")
+//        .bean(messageGenerator)
+//        .routeId(RouteConstant.FIRST_ROUTE)
+//        .tracing()
+//        .to(RouteConstant.REDIS_STRING_PUT);
     // @formatter:on
 
     // @formatter:off
@@ -57,5 +57,16 @@ public class RedisRoute extends RouteBuilder {
                           configurationProperties.getRedisPort(),
                           RedisConfiguration.REDIS_TEMPLATE));
     // @formatter:on
+
+    // @formatter:off
+    from(RouteConstant.REDIS_STRING_GET)
+        .routeId(RouteConstant.REDIS_STRING_GET)
+        .setHeader(RedisConstants.COMMAND, RedisCommand.GET::name)
+        .setHeader(RedisConstants.KEY, simple("${body[key]}"))
+        .to(String.format("spring-redis:%s:%d?redisTemplate=#%s",
+                          configurationProperties.getRedisHost(),
+                          configurationProperties.getRedisPort(),
+                          RedisConfiguration.REDIS_TEMPLATE));
+  // @formatter:on
   }
 }

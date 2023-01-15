@@ -25,6 +25,7 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 	implementation "org.apache.camel.springboot:camel-spring-boot-starter:$camelVersion"
 	implementation "org.apache.camel.springboot:camel-spring-redis-starter:$camelVersion"
 	compileOnly 'org.projectlombok:lombok'

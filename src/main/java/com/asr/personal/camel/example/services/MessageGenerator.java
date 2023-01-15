@@ -1,5 +1,7 @@
 package com.asr.personal.camel.example.services;
 
+import java.util.Map;
+
 public interface MessageGenerator {
-  String getMessage();
+  Map<String, Object> getMessage();
 }
